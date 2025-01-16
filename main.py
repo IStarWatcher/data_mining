@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import numpy as np
 from pydantic import BaseModel
 import cloudpickle
@@ -21,11 +21,19 @@ def get_prediction(pred):
         sum += list[0]
     return sum / count
 
-@app.post('/predict')
+@app.post('/predict/')
 async def predict(input_data: InputData):
-    data = pd.DataFrame({ 'date': [input_data.date], 'latitude': [input_data.latitude], 'longitude': [input_data.longitude] })
-    data['date'] = pd.to_datetime(data['date'])
+    try:
+        data = pd.DataFrame({ 'date': [input_data.date], 'latitude': [input_data.latitude], 'longitude': [input_data.longitude] })
+        data['date'] = pd.to_datetime(data['date'])
 
-    pred, _ = model.predict(data, quantiles = [0.1, 0.5, 0.9])
+        pred, _ = model.predict(data, quantiles = [0.1, 0.5, 0.9])
 
-    return { "prediction": float(get_prediction(pred))}
+        return { "prediction": float(get_prediction(pred))}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+# Запуск сервера
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
