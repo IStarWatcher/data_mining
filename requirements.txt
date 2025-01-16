@@ -1,9 +1,6 @@
 fastapi==0.103.0
-numpy
-scikit-learn==1.6.0
 uvicorn==0.23.2
 streamlit
 cloudpickle
 pandas
 bayesnf
-streamlit
