@@ -26,6 +26,6 @@ async def predict(input_data: InputData):
     data = pd.DataFrame({ 'date': [input_data.date], 'latitude': [input_data.latitude], 'longitude': [input_data.longitude] })
     data['date'] = pd.to_datetime(data['date'])
 
-    pred, _ = model.predict(data)
+    pred, _ = model.predict(data, quantiles = [0.1, 0.5, 0.9])
 
     return { "prediction": float(get_prediction(pred))}
