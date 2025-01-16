@@ -1,5 +1,4 @@
 from fastapi import FastAPI, HTTPException
-import numpy as np
 from pydantic import BaseModel
 import cloudpickle
 import pandas as pd
