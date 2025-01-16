@@ -5,3 +5,4 @@ uvicorn==0.23.2
 streamlit
 cloudpickle
 pandas
+bayesnf
