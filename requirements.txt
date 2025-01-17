@@ -5,3 +5,4 @@ cloudpickle
 pandas
 bayesnf
 folium
+streamlit_folium
