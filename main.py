@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import pickle
+import cloudpickle
 import pandas as pd
 
 app = FastAPI()
@@ -11,7 +11,7 @@ class InputData(BaseModel):
     longitude: float
 
 with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+    model = cloudpickle.load(file)
 
 def get_prediction(pred):
     count = len(pred[0])
