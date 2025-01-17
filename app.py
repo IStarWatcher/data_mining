@@ -23,7 +23,7 @@ if st.button("Получить прогноз"):
 
     try:
         response = requests.post(
-            "http://0.0.0.0:8000/predict/",  # Ваш публичный URL
+            "https://data-mining-omn3.onrender.com//predict/",  # Ваш публичный URL
             json=data
         )
         response.raise_for_status()
